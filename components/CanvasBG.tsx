@@ -7,7 +7,7 @@ interface Point {
   y: number;
 }
 
-const Canvas: React.FC = () => {
+const Canvas = () => {
   const canvasRef = useRef<HTMLCanvasElement | null>(null);
 
   useEffect(() => {
