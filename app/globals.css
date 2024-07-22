@@ -67,3 +67,23 @@
     @apply bg-background text-foreground;
   }
 }
+@layer components {
+  .disable-blur {
+    image-rendering: pixelated;
+  }
+}
+.imgPixelated {
+  image-rendering: pixelated;
+  background-color: brown;
+  /* Safari seems to support, but seems deprecated and does the same thing as the others. */
+  image-rendering: -webkit-optimize-contrast;
+}
+.rendering-auto {
+  image-rendering: auto;
+}
+.rendering-crisp-edges {
+  image-rendering: crisp-edges;
+}
+.rendering-pixelated {
+  image-rendering: pixelated;
+}

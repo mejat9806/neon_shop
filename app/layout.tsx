@@ -5,6 +5,7 @@ import "./globals.css";
 import Header from "@/components/HeaderComponents/Header";
 import Canvas from "@/components/CanvasBG";
 import { RefContextProvider } from "@/lib/Context";
+import { connectToDb } from "@/lib/connectToDb";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -47,14 +48,17 @@ export default function RootLayout({
 }: Readonly<{
   children: React.ReactNode;
 }>) {
+  connectToDb();
   return (
     <html lang="en">
       <body
         className={`${inter.className} ${silkscreen.variable} ${orbitron.variable} ${tiny5.variable}${saiba.variable} ${saibaOutline.variable} `}
       >
-        <Canvas />
         <Header />
-        <main className="h-full">{children}</main>
+        <Canvas />
+        <div className="h-full">
+          <main className=" ">{children}</main>
+        </div>
       </body>
     </html>
   );

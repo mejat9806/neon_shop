@@ -13,7 +13,7 @@ const Header = () => {
   // }, [isInView]);
   // console.log(isInView);
   return (
-    <nav className="font-silkscreen text-4xl flex justify-between z-50  fixed w-full mix-blend-difference text-white">
+    <nav className="font-silkscreen text-4xl flex justify-between z-50  fixed  w-full mix-blend-difference text-white ">
       <div className="">MENU</div>
       <div>LOGO</div>
       <Cart />

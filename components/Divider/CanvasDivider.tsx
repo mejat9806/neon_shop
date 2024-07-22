@@ -19,7 +19,7 @@ const CanvasDivider = () => {
     ctx.stroke();
   }, []);
 
-  return <canvas ref={canvasRef} className="w-full h-full"></canvas>;
+  return <canvas ref={canvasRef} className=""></canvas>;
 };
 
 export default CanvasDivider;

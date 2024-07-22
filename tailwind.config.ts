@@ -13,6 +13,9 @@ const config = {
   ],
   prefix: "",
   theme: {
+    dropShadow: {
+      "3xl": "0 35px 35px rgba(250, 190, 190, 0.8)",
+    },
     container: {
       center: true,
       padding: "2rem",
@@ -77,14 +80,28 @@ const config = {
           from: { height: "var(--radix-accordion-content-height)" },
           to: { height: "0" },
         },
+
+        "infinite-scroll-normal": {
+          from: { transform: "translateX(0)" },
+          to: { transform: "translateX(-100%)" },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "infinite-scroll-normal": "infinite-scroll-normal 15s linear infinite ",
       },
     },
   },
-  plugins: [require("tailwindcss-animate"), addVariablesForColors],
+  variants: {
+    // all the following default to ['responsive']
+    imageRendering: ["responsive"],
+  },
+  plugins: [
+    require("tailwindcss-animate"),
+    addVariablesForColors,
+    require("tailwindcss-image-rendering"),
+  ],
 } satisfies Config;
 
 function addVariablesForColors({ addBase, theme }: any) {
