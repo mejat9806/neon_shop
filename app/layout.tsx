@@ -11,7 +11,7 @@ const inter = Inter({ subsets: ["latin"] });
 
 export const metadata: Metadata = {
   title: {
-    template: "%s | NEON",
+    template: "%s | the wild Oasis",
     default: "Welcome | NEON",
   },
   description: "Home page of NEON Website home for good fashion",
@@ -57,7 +57,7 @@ export default function RootLayout({
         <Header />
         <Canvas />
         <div className="h-full">
-          <main className=" ">{children}</main>
+          <main className=" "> {children}</main>
         </div>
       </body>
     </html>

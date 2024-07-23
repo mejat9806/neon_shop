@@ -1,3 +1,5 @@
+import Header from "@/components/HeaderComponents/Header";
+
 export default function ProductLayout({
   children,
 }: {

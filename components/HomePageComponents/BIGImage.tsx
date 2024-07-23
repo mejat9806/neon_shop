@@ -3,7 +3,7 @@ import ButtonWithMotion from "../UI components/ButtonWithMotion";
 
 const BIGImage = () => {
   return (
-    <div className="font-silkscreen overflow-hidden">
+    <div className="font-silkscreen overflow-hidden -z-10">
       <div className="flex h-screen ">
         <div className="flex w-svw relative">
           <div className="w-1/2  relative">

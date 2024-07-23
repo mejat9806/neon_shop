@@ -1,4 +1,6 @@
-const Loading = () => {
+import React from "react";
+
+const Spinner = () => {
   return (
     <div
       role="status"
@@ -26,4 +28,4 @@ const Loading = () => {
   );
 };
 
-export default Loading;
+export default Spinner;

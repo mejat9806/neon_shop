@@ -2,15 +2,22 @@ import CanvasDivider from "@/components/Divider/CanvasDivider";
 import Divider from "@/components/Divider/Divider";
 import BIGImage from "@/components/HomePageComponents/BIGImage";
 import Product1 from "@/components/HomePageComponents/Product1";
+import { productDataType } from "./_types/type";
+import { Suspense } from "react";
+import Header from "@/components/HeaderComponents/Header";
 export default async function Home() {
-  const data = await fetch("http://localhost:3000/api/products").then((res) =>
-    res.json(),
-  );
-  console.log(data);
+  const res = await fetch("http://localhost:3000/api/products", {
+    cache: "no-store",
+  });
+  const data: productDataType[] = await res.json();
+  // console.log(data, "at home page");
+  const promotionTshirt = data.filter((item) => item.category === "shirt");
+  console.log(promotionTshirt, "promotionTshirt");
   return (
-    <main className={`flex flex-col `}>
+    <main className={`flex flex-col`}>
+      <Header />
       <BIGImage />
-      <Product1 />
+      <Product1 data={promotionTshirt} /> {/* Pass filtered data to Product1 */}
       <Divider />
     </main>
   );

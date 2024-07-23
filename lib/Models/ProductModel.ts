@@ -1,21 +1,43 @@
-import mongoose, { Model } from "mongoose";
+import mongoose, { Document, Model, Schema, Types } from "mongoose";
 
-interface ProductType {
+// interface SizeType {
+//   size: string;
+//   qty: number;
+// }
+// const SizeSchema = new mongoose.Schema<SizeType>({
+//   size: String,
+//   qty: Number,
+// });
+// interface ColorType {
+//   color: string;
+//   sizes: SizeType[];
+// }
+// const ColorOptionsSchema = new mongoose.Schema<ColorType>({
+//   color: { type: String, required: true },
+//   sizes: { type: [SizeSchema], required: true },
+// });
+interface ProductType extends Document {
   name: string;
-  price: number;
-  type: string;
+  category: string;
   desc: string;
-  image: string[];
+  front: string;
+  back: string;
+  // options: ColorType[];
+  Variants: Types.ObjectId[];
 }
-
 const ProductsSchema = new mongoose.Schema<ProductType>({
   desc: { type: String, required: [true, "des is required"] },
   name: { type: String, required: [true, "Name is required"] },
-  type: { type: String, required: [true, "Type is required"] },
-  image: [String],
-  price: { type: Number, required: [true, "Price is required"] },
+  category: { type: String, required: [true, "category is required"] },
+  front: { type: String, required: [true, "Image is required"] },
+  back: { type: String, required: [true, "Image is required"] },
+  // options: { type: [ColorOptionsSchema], required: true },
+  Variants: [{ type: Schema.Types.ObjectId, ref: "Variant" }],
 });
 
 const Product: Model<ProductType> =
   mongoose.models.Product ?? mongoose.model("Product", ProductsSchema);
 export default Product;
+
+//this is called embeded DB
+//the one with mongoose.ObjectID is a refrence technique
