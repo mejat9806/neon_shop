@@ -4,12 +4,11 @@ const Spinner = () => {
   return (
     <div
       role="status"
-      className="w-svw h-svh flex justify-center-items-center z-50 bg-black"
+      className="w-svw h-svh flex justify-center items-center z-50 bg-black"
     >
-      <h1>Laoding</h1>
-      {/* <svg
+      <svg
         aria-hidden="true"
-        className="w-8 h-8 text-gray-200 animate-spin dark:text-gray-600 fill-blue-600"
+        className="w-40 h-40 text-gray-200 animate-spin dark:text-gray-600 fill-red-600"
         viewBox="0 0 100 101"
         fill="none"
         xmlns="http://www.w3.org/2000/svg"
@@ -23,7 +22,7 @@ const Spinner = () => {
           fill="currentFill"
         />
       </svg>
-      <span className="sr-only">Loading...</span> */}
+      <span className="sr-only">Loading...</span>
     </div>
   );
 };

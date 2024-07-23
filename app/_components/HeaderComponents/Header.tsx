@@ -9,8 +9,8 @@ const Header = () => {
   console.log(isNavOPen);
   return (
     <nav
-      className={`font-silkscreen text-4xl flex justify-between fixed w-full text-balance  bg-transparent ${
-        isNavOPen ? "mix-blend-normal " : "mix-blend-darken "
+      className={`font-silkscreen text-4xl flex justify-between fixed top-0 w-full text-balance  bg-transparent  ${
+        isNavOPen ? "mix-blend-normal " : "mix-blend-difference p-7"
       } `}
     >
       <div className=" text-white ">

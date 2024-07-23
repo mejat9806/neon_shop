@@ -87,3 +87,17 @@
 .rendering-pixelated {
   image-rendering: pixelated;
 }
+.pixelated {
+  font-family: monospace;
+  font-size: 1rem; /* Adjust size as needed */
+  background: linear-gradient(to right, #000 50%, transparent 50%);
+  background-size: 10px 10px; /* Adjust the size to make the effect more or less pixelated */
+  background-clip: text;
+  -webkit-background-clip: text;
+  color: transparent;
+}
+
+.pixelated-hover:hover {
+  background: none;
+  color: black; /* Set the color you want for the hover state */
+}

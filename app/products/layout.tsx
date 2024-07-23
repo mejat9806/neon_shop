@@ -1,4 +1,4 @@
-import Header from "@/components/HeaderComponents/Header";
+import Header from "../_components/HeaderComponents/Header";
 
 export default function ProductLayout({
   children,
@@ -7,6 +7,7 @@ export default function ProductLayout({
 }) {
   return (
     <section className="py-10  flex justify-center items-center h-svh">
+      <Header />
       {children}
     </section>
   );

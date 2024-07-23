@@ -1,10 +1,10 @@
-import CanvasDivider from "@/components/Divider/CanvasDivider";
-import Divider from "@/components/Divider/Divider";
-import BIGImage from "@/components/HomePageComponents/BIGImage";
-import Product1 from "@/components/HomePageComponents/Product1";
+import CanvasDivider from "@/app/_components/Divider/CanvasDivider";
+import Divider from "@/app/_components/Divider/Divider";
+import BIGImage from "@/app/_components/HomePageComponents/BIGImage";
+import Product1 from "@/app/_components/HomePageComponents/Product1";
 import { productDataType } from "./_types/type";
 import { Suspense } from "react";
-import Header from "@/components/HeaderComponents/Header";
+import Header from "@/app/_components/HeaderComponents/Header";
 export default async function Home() {
   const res = await fetch("http://localhost:3000/api/products", {
     cache: "no-store",
