@@ -1,6 +1,7 @@
 "use client";
-import React, { SetStateAction } from "react";
+import React from "react";
 import { Button } from "../ui/button";
+import { AnimatePresence, motion as m } from "framer-motion";
 
 const NavItem = ({
   setIsNavOpen,
@@ -8,9 +9,15 @@ const NavItem = ({
   setIsNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
   return (
-    <div className=" bg-black  h-svh w-svw absolute overflow-hidden  p-7">
+    <m.div
+      className="absolute text-white h-svh  w-svw overflow-hidden p-7 z-50 origin-top"
+      initial={{ translateY: "-100vh", backgroundColor: "black" }}
+      animate={{ translateY: "0" }}
+      exit={{ translateY: "-100vh" }}
+      transition={{ duration: 0.4 }}
+    >
       <div>
-        <div className="flex justify-between ">
+        <div className="flex justify-between">
           <div
             className="cursor-pointer bg-transparent"
             onClick={() => setIsNavOpen((open) => !open)}
@@ -25,13 +32,19 @@ const NavItem = ({
           </Button>
         </div>
 
-        <ul className="text-6xl flex flex-col justify-center items-center mt-32 gap-9 ">
+        <m.ul
+          className="text-6xl flex flex-col justify-center items-center mt-32 gap-9"
+          initial={{ translateY: "-100vh" }}
+          animate={{ translateY: 0 }}
+          exit={{ translateY: "-100vh" }}
+          transition={{ duration: 0.3 }}
+        >
           <li>nav 1</li>
           <li>nav 2</li>
           <li>nav 3</li>
-        </ul>
+        </m.ul>
       </div>
-    </div>
+    </m.div>
   );
 };
 

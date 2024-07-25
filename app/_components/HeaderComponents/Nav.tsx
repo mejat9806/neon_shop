@@ -1,45 +1,29 @@
 "use client";
 
-import React, { useState } from "react";
-import NavItem from "./NavItem";
-import { motion as m, AnimatePresence } from "framer-motion";
-
-const navItem = [
-  {
-    name: "shop",
-    link: "/shop",
-  },
-  {
-    name: "about",
-    link: "/about",
-  },
-];
+import React from "react";
 
 export const Nav = ({
   setIsNavOpen,
-  isNavOPen,
 }: {
   setIsNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
-  isNavOPen: boolean;
 }) => {
   return (
-    <AnimatePresence>
-      <nav className=" ">
-        {!isNavOPen ? (
-          <h1 onClick={() => setIsNavOpen((open) => !open)} className=" ">
-            Menu
-          </h1>
-        ) : (
-          <m.div
-            className=""
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-          >
+    <nav className="">
+      <h1
+        key={"menuClose"}
+        onClick={() => setIsNavOpen((open) => !open)}
+        className="cursor-pointer "
+      >
+        Menu
+      </h1>
+
+      {/* <AnimatePresence>
+        {isNavOPen && (
+          <m.div key={"menuOpen"}>
             <NavItem setIsNavOpen={setIsNavOpen} />
           </m.div>
         )}
-      </nav>
-    </AnimatePresence>
+      </AnimatePresence> */}
+    </nav>
   );
 };

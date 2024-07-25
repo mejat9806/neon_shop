@@ -6,18 +6,21 @@ export async function generateMetadata({
   params: { productId: string };
 }) {
   const productId = params.productId;
-  console.log(productId);
   const product = await fetch(
     `http://localhost:3000/api/products/${productId}`,
   ).then((response) => response.json());
-  console.log(product, " productMetadata");
+  console.log(product, "productIDDD");
   return {
     title: product.name.toUpperCase(),
   };
 }
 
-const page = ({ params }: { params: string }) => {
-  console.log(params);
+const page = async ({ params }: { params: { productId: string } }) => {
+  const { productId } = params;
+  const data = await fetch(
+    `http://localhost:3000/api/products/${productId}`,
+  ).then((res) => res.json());
+  console.log(data, "in fecth");
   return (
     <div className="mt-5">
       <h1>page</h1> <header>dsadadsadasdada</header>

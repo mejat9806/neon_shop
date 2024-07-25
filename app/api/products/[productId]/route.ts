@@ -11,6 +11,7 @@ export async function GET(
 ) {
   await connectToDb();
   const { productId } = params;
-  const data = await Product.findById({ _id: productId });
+  const data = await Product.findById(productId);
+  console.log(data, productId, "sadasdad", "datasdasdasasfasfa");
   return NextResponse.json(data);
 }

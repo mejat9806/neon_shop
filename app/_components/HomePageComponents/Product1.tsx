@@ -10,7 +10,7 @@ interface dataType {
 const Product1 = ({ data }: dataType) => {
   console.log(data, "dadasdadasda");
   return (
-    <div className=" flex my-10 justify-center gap-x-10">
+    <div className=" flex my-10 justify-center gap-x-10 ">
       {data.map((item) => (
         <ProductsList key={item._id} data={item} />
       ))}

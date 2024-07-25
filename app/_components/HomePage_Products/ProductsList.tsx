@@ -13,17 +13,17 @@ const ProductsList = ({ data }: dataType) => {
   console.log(imageForFrontPage);
   return (
     <m.div
-      className="relative w-52 h-52 "
+      className=" w-[500px] h-[500px] relative "
       initial={{ scale: 1, x: 0 }}
       whileHover={{
-        scale: 1.2,
+        scale: 1.05,
         x: [0, -2, 2, 0],
       }}
     >
       <Image
         src={imageForFrontPage}
         fill
-        className="hover:saturate-200	hover:drop-shadow-3xl dropsha"
+        className="hover:saturate-200	hover:drop-shadow-3xl object-contain "
         alt={data.name}
         onClick={() => router.push(`/products/${data._id}`)}
       />
