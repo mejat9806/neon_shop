@@ -11,7 +11,9 @@ export const Nav = ({
     <nav className="">
       <h1
         key={"menuClose"}
-        onClick={() => setIsNavOpen((open) => !open)}
+        onClick={() => {
+          setIsNavOpen((open) => !open), console.log("hello");
+        }}
         className="cursor-pointer "
       >
         Menu

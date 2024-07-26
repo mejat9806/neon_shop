@@ -2,15 +2,17 @@
 import React from "react";
 import { Button } from "../ui/button";
 import { AnimatePresence, motion as m } from "framer-motion";
+import { useRouter } from "next/navigation";
 
 const NavItem = ({
   setIsNavOpen,
 }: {
   setIsNavOpen: React.Dispatch<React.SetStateAction<boolean>>;
 }) => {
+  const router = useRouter();
   return (
     <m.div
-      className="absolute text-white h-svh  w-svw overflow-hidden p-7 z-50 origin-top"
+      className="fixed text-white h-svh  w-svw overflow-hidden p-7 z-50 origin-top font-silkscreen text-4xl"
       initial={{ translateY: "-100vh", backgroundColor: "black" }}
       animate={{ translateY: "0" }}
       exit={{ translateY: "-100vh" }}
@@ -22,7 +24,9 @@ const NavItem = ({
             className="cursor-pointer bg-transparent"
             onClick={() => setIsNavOpen((open) => !open)}
           >
-            <h1 className="">Logos</h1>
+            <h1 className="" onClick={() => router.push("/")}>
+              Logos
+            </h1>
           </div>
           <Button
             className="text-6xl bg-transparent p-10"

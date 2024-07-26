@@ -1,20 +1,45 @@
 "use client";
 
-import { createContext, ReactNode, useContext, useRef } from "react";
+import {
+  createContext,
+  Dispatch,
+  ReactNode,
+  SetStateAction,
+  useContext,
+  useRef,
+  useState,
+} from "react";
 
-const refContext = createContext<React.RefObject<any> | null>(null);
+interface contextType {
+  ref: React.RefObject<HTMLElement>;
+  isNavOpen: boolean;
+  setIsCartOpen: Dispatch<SetStateAction<boolean>>;
+  isCartOpen: boolean;
+  setIsNavOpen: Dispatch<SetStateAction<boolean>>;
+}
+const ContextStuff = createContext<any | null>(null);
 
-const RefContextProvider = ({ children }: { children: ReactNode }) => {
-  const Ref = useRef<any>(null);
-  return <refContext.Provider value={Ref}>{children}</refContext.Provider>;
+const ContextStuffProvider = ({ children }: { children: ReactNode }) => {
+  const Ref = useRef<HTMLDivElement>(null);
+  const [isNavOpen, setIsNavOpen] = useState(false);
+  const [isCartOpen, setIsCartOpen] = useState(false);
+
+  return (
+    <ContextStuff.Provider
+      value={{ Ref, isNavOpen, setIsCartOpen, isCartOpen, setIsNavOpen }}
+    >
+      {children}
+    </ContextStuff.Provider>
+  );
 };
 
-const useRefContext = () => {
-  const ref = useContext(refContext);
+const useContextStuff = () => {
+  const ref = useContext(ContextStuff);
+
   if (ref === undefined) {
     throw new Error("context error");
   }
   return ref;
 };
 
-export { RefContextProvider, useRefContext };
+export { ContextStuffProvider, useContextStuff };

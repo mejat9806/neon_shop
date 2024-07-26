@@ -1,6 +1,6 @@
 import { Dispatch, SetStateAction } from "react";
 
-const Cart = ({
+const CartTitle = ({
   setIsCartOpen,
 }: {
   setIsCartOpen: Dispatch<SetStateAction<boolean>>;
@@ -20,4 +20,4 @@ const Cart = ({
   );
 };
 
-export default Cart;
+export default CartTitle;

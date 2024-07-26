@@ -1,3 +1,4 @@
+import MainHeader from "@/app/_components/HeaderComponents/MainHeader";
 import { Metadata } from "next";
 
 export async function generateMetadata({
@@ -22,7 +23,7 @@ const page = async ({ params }: { params: { productId: string } }) => {
   ).then((res) => res.json());
   console.log(data, "in fecth");
   return (
-    <div className="mt-5">
+    <div className="mt-5 overflow-hidden">
       <h1>page</h1> <header>dsadadsadasdada</header>
     </div>
   );

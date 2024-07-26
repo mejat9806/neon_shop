@@ -4,6 +4,7 @@ import type { Metadata } from "next";
 import { Inter, Orbitron, Silkscreen } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
+import { ContextStuffProvider } from "@/lib/Context";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -52,9 +53,11 @@ export default function RootLayout({
         className={`${inter.className} ${silkscreen.variable} ${orbitron.variable} ${tiny5.variable}${saiba.variable} ${saibaOutline.variable} `}
       >
         <Canvas />
-        <div className="h-full">
-          <main className=" "> {children}</main>
-        </div>
+        <ContextStuffProvider>
+          <div className="h-full ">
+            <main className=" "> {children}</main>
+          </div>
+        </ContextStuffProvider>
       </body>
     </html>
   );
