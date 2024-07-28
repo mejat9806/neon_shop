@@ -14,7 +14,7 @@ const config = {
   prefix: "",
   theme: {
     dropShadow: {
-      "3xl": "0 35px 35px rgba(250, 190, 190, 0.8)",
+      "3xl": "0 15px 15px rgba(250, 190, 190, 0.8)",
     },
     container: {
       center: true,

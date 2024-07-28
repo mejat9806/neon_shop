@@ -2,6 +2,7 @@ import Image from "next/image";
 import ButtonWithMotion from "../UI components/ButtonWithMotion";
 import maskBG from "@/public/image/mask_bg.webp";
 import GirlBG from "@/public/image/girl_bg.webp";
+import Link from "next/link";
 const BIGImage = () => {
   return (
     <div className="font-silkscreen overflow-hidden -z-10">
@@ -25,13 +26,14 @@ const BIGImage = () => {
               Vibe
               <span className="selection:bg-red-200 text-red-400">Feel</span>
             </h1>
-            <ButtonWithMotion
+            {/* <ButtonWithMotion
               type="link"
               linkHref="/products"
               linkName="shop now"
             >
               Shop Now
-            </ButtonWithMotion>
+            </ButtonWithMotion> */}
+            <div></div>
           </div>
         </div>
       </div>

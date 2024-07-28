@@ -60,7 +60,7 @@ const CartItem = ({
   return (
     <div
       ref={ref}
-      className="absolute bg-transparent font-orbitron right-3 top-6 w-[40%] flex justify-end overflow-hidden "
+      className="absolute bg-transparent font-orbitron right-3 top-6 w-[600px] flex justify-end overflow-hidden "
     >
       <m.div
         className=" text-white   bg-black w-full h-full overflow-hidden  z-50 p-5 origin-top-right"
