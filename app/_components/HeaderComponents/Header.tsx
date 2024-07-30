@@ -7,7 +7,7 @@ import { AnimatePresence } from "framer-motion";
 import NavItem from "./NavItem";
 import CartItem from "./CartItem";
 import { usePathname } from "next/navigation";
-import { useContextStuff } from "@/lib/Context";
+import { useContextStuff } from "@/app/_context/Context";
 
 const Header = () => {
   // const [isNavOpen, setIsNavOpen] = useState(false);

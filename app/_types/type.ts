@@ -19,3 +19,12 @@ export interface productDataType {
   category: string;
   Variants: [variantType];
 }
+export interface sizeTye {
+  color: string;
+  image: [string];
+  product: string;
+  quantity: number;
+  size: string;
+  sku: string;
+  _id: string;
+}

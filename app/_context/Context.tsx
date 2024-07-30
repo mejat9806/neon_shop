@@ -9,7 +9,10 @@ import {
   useRef,
   useState,
 } from "react";
-
+type CartItem = {
+  color: string | null;
+  size: string | null;
+};
 interface contextType {
   ref: React.RefObject<HTMLElement>;
   isNavOpen: boolean;
@@ -23,10 +26,23 @@ const ContextStuffProvider = ({ children }: { children: ReactNode }) => {
   const Ref = useRef<HTMLDivElement>(null);
   const [isNavOpen, setIsNavOpen] = useState(false);
   const [isCartOpen, setIsCartOpen] = useState(false);
+  const [localCart, setLocalCart] = useState<CartItem[]>([]);
+  const [allCartItem, setAllCartItem] = useState([]);
+  console.log(allCartItem, "allCartItem");
 
   return (
     <ContextStuff.Provider
-      value={{ Ref, isNavOpen, setIsCartOpen, isCartOpen, setIsNavOpen }}
+      value={{
+        Ref,
+        isNavOpen,
+        setIsCartOpen,
+        isCartOpen,
+        setIsNavOpen,
+        setLocalCart,
+        localCart,
+        setAllCartItem,
+        allCartItem,
+      }}
     >
       {children}
     </ContextStuff.Provider>

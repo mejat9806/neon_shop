@@ -1,18 +1,24 @@
 "use client";
-import React, {
-  Dispatch,
-  SetStateAction,
-  Suspense,
-  useEffect,
-  useRef,
-} from "react";
-import { Button } from "../ui/button";
-import { AnimatePresence, motion as m } from "framer-motion";
-import CartListItem from "./CartListItem";
-import Spinner from "../Spinner";
-import SpinnerSmall from "../SpinnerSmall";
+import { useContextStuff } from "@/app/_context/Context";
 import currencyFormat from "@/lib/currencyFormat";
-
+import { motion as m } from "framer-motion";
+import { Dispatch, SetStateAction, Suspense, useEffect, useRef } from "react";
+import SpinnerSmall from "../SpinnerSmall";
+import { Button } from "../ui/button";
+import CartListItem from "./CartListItem";
+import { useGetCart } from "@/lib/clientFetching/useGetCart";
+import {
+  ResultDataType,
+  useGetAllCartItem,
+} from "@/lib/clientFetching/useGetAllCartItem";
+interface CartItem {
+  color: string;
+  size: string;
+  quantity: number;
+}
+interface Accumulator {
+  [key: string]: CartItem; // Index signature for string keys
+}
 const CartItem = ({
   setIsCartOpen,
   isNavOpen,
@@ -20,25 +26,25 @@ const CartItem = ({
   isNavOpen: boolean;
   setIsCartOpen: Dispatch<SetStateAction<boolean>>;
 }) => {
-  const item = [
-    {
-      name: "Green Shirt ",
-      price: 100,
-      qty: 1,
-      img: "/fashion image/buttonupshortslevecleanupgreen.png",
-      id: "66a20cd16d64c881b007969c",
-    },
-
-    {
-      name: "Pink Shirt",
-      price: 1000,
-      qty: 10,
-      img: "/fashion image/buttonupshortslevecleanuppink.png",
-      id: "66a20d106d64c881b00796a3",
-    },
-  ];
   const ref = useRef<HTMLDivElement>(null);
-
+  const { setLocalCart, localCart } = useContextStuff();
+  console.log(localCart, "allItemInCarttt");
+  const { data } = useGetAllCartItem({ localCart });
+  console.log(data, "dasadasdagwwg");
+  const calclatedItemsDuplicated = data.reduce<Accumulator>((acc, item) => {
+    const key = `${item?.color}-${item?.size}`;
+    if (acc[key]) {
+      acc[key].quantity += 1; // If item exists, increase the quantity
+    } else {
+      acc[key] = { ...item, quantity: 1 }; // Otherwise, add the item with quantity 1
+    }
+    return acc;
+  }, {});
+  const uniqueCartItems = Object.values(
+    calclatedItemsDuplicated,
+  ) as ResultDataType[];
+  console.log(uniqueCartItems, "uniqueCartItems");
+  console.log(data, "stuffff");
   useEffect(() => {
     function handler(e: MouseEvent) {
       const contains = ref.current?.contains(e.target as Node);
@@ -54,9 +60,38 @@ const CartItem = ({
     }
     document.addEventListener("mousedown", handler);
   });
+  useEffect(() => {
+    const getLocalCart = localStorage.getItem("localCart");
+    if (getLocalCart) {
+      setLocalCart(JSON.parse(getLocalCart));
+    }
+    console.log(getLocalCart);
+  }, [setLocalCart]);
+  useEffect(() => {
+    localStorage.setItem("localCart", JSON.stringify(localCart));
+  }, [localCart]);
+  const flattenedCartItems = data.flat();
+  console.log(flattenedCartItems, "flat");
 
-  const totalPrice = item.reduce((sum, item) => sum + item.price, 0);
+  const totalPrice = uniqueCartItems
+    .flat()
+    .reduce((sum, item) => sum + item?.product?.price * item?.quantity, 0);
   const formatedCurrrency = currencyFormat(totalPrice);
+
+  function addToURlseachParamsForCheckOut() {
+    const itemsToCheckout = flattenedCartItems.map((item) => ({
+      color: item.color,
+      size: item.size,
+      quantity: item.quantity,
+      product: {
+        price: item.product.price,
+        productId: item.product._id,
+      },
+    }));
+
+    localStorage.setItem("cartToCheckout", JSON.stringify(itemsToCheckout));
+  }
+
   return (
     <div
       ref={ref}
@@ -86,8 +121,8 @@ const CartItem = ({
           <div>
             <Suspense fallback={<SpinnerSmall className="h-full" />}>
               <m.ul className=" flex flex-col gap-9 w-full px-4">
-                {item.map((item) => (
-                  <CartListItem item={item} key={item.name} />
+                {uniqueCartItems.map((item, i) => (
+                  <CartListItem item={item} key={i} />
                 ))}
               </m.ul>
             </Suspense>
@@ -95,7 +130,10 @@ const CartItem = ({
               <h1>
                 Total : <span className="font-bold">{formatedCurrrency}</span>
               </h1>
-              <Button className="w-32 bg-red-500 hover:bg-white hover:text-red-600">
+              <Button
+                className="w-32 bg-red-500 hover:bg-white hover:text-red-600"
+                onClick={() => addToURlseachParamsForCheckOut()}
+              >
                 Pay
               </Button>
             </div>

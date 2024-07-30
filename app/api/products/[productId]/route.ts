@@ -17,8 +17,9 @@ export async function GET(
   const { productId } = params; //this is for normal params
 
   const url = new URL(request.url);
-  const variantId = url.searchParams.get("variant");
-  console.log(variantId, "variantId");
+  const color = url.searchParams.get("color");
+  const size = url.searchParams.get("size");
+  console.log(color, size, "colorrrrr");
   let data;
   data = await Product.findById(productId).populate({
     path: "Variants",
@@ -28,9 +29,27 @@ export async function GET(
   if (!data) {
     NextResponse.json("no data found");
   }
-  if (variantId) {
-    const variantdata = await Variant.findById(variantId);
-    console.log(variantdata, variantId, "variantIdcheck");
+  if (color && size) {
+    const variantdata = await Variant.find({
+      color: color,
+      size: size.toUpperCase(),
+    }).populate({ path: "product", model: "Product", select: "-Variants" });
+    console.log(variantdata, color, size, "variantIdcheck");
+    return NextResponse.json(variantdata);
+  }
+  if (color) {
+    const variantdata = await Variant.find({
+      color: color,
+    });
+    console.log(variantdata, color, "variantIdcheck");
+    return NextResponse.json(variantdata);
+  }
+  if (size) {
+    const variantdata = await Variant.find({
+      color: color,
+      size: size.toUpperCase(),
+    });
+    console.log(variantdata, color, "variantIdcheck");
     return NextResponse.json(variantdata);
   }
   console.log(data);
