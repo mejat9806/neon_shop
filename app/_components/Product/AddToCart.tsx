@@ -6,8 +6,9 @@ import { useEffect, useState } from "react";
 import { useContextStuff } from "@/app/_context/Context";
 import { useGetCart } from "@/lib/clientFetching/useGetCart";
 import { v4 as uuidv4 } from "uuid";
+import { variantType } from "@/app/_types/type";
 
-const AddToCart = () => {
+const AddToCart = ({ colorVariants }: { colorVariants: variantType[] }) => {
   const { setLocalCart, localCart } = useContextStuff();
   const searchParams = useSearchParams(); //this is for client components to get the search params
   const router = useRouter();
@@ -18,13 +19,12 @@ const AddToCart = () => {
   const size = params.get("size");
   let data: any;
   let isLoading;
-  if (color && size) {
-    // eslint-disable-next-line react-hooks/rules-of-hooks
-    const result = useGetCart({ color, size });
-    data = result.data;
-    isLoading = result.isLoading;
-  }
-  console.log({ data, local: localCart.flat() }, "useQueryData");
+
+  const result = useGetCart({ color, size });
+  data = result.data;
+  isLoading = result.isLoading;
+  console.log({ colorVariants, data }, "check the different");
+  console.log({ data }, "useQueryData");
   //this is for initialization of the localStorage
   useEffect(() => {
     const storedCart = localStorage.getItem("localCart");

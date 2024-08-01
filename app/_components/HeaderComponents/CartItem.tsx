@@ -3,12 +3,11 @@ import { useContextStuff } from "@/app/_context/Context";
 import currencyFormat from "@/lib/currencyFormat";
 import { motion as m } from "framer-motion";
 import { Dispatch, SetStateAction, Suspense, useEffect, useRef } from "react";
+import { v4 as uuidv4 } from "uuid";
 import SpinnerSmall from "../SpinnerSmall";
 import { Button } from "../ui/button";
 import CartListItem from "./CartListItem";
-import { v4 as uuidv4 } from "uuid";
 
-import { useGetCart } from "@/lib/clientFetching/useGetCart";
 import {
   ResultDataType,
   useGetAllCartItem,
@@ -34,17 +33,17 @@ const CartItem = ({
   const { setLocalCart, localCart, setAllCartItem } = useContextStuff();
   console.log(localCart.flat(), "allItemInCarttt");
   const data: CartItem[] = localCart.flat();
+  console.log(data, "dafafafasfasfa");
   // const { data } = useGetAllCartItem({ localCart });
   // console.log(data, "dasadasdagwwg");
   const calclatedItemsDuplicated = data.reduce<Accumulator>((acc, item) => {
-    const key = `${item?.color}-${item?.size}`;
+    const key = `${item.color}-${item.size}`;
     if (acc[key]) {
       //this for check if the data already have sama data
       acc[key].qty += 1; // If item exists, increase the quantity
     } else {
-      acc[key] = { ...item, quantity: 1, id: uuidv4() }; // Otherwise, add the item with quantity 1 , id for easy identification for each item good for like deleted stuff
+      acc[key] = { ...item, qty: item.qty || 1, id: uuidv4() }; // Otherwise, add the item with quantity 1 , id for easy identification for each item good for like deleted stuff
     }
-
     return acc;
   }, {});
   console.log(calclatedItemsDuplicated, "calclatedItemsDuplicated");
@@ -66,6 +65,7 @@ const CartItem = ({
     }
     document.addEventListener("mousedown", handler);
   });
+  console.log(uniqueCartItems, "1111");
   useEffect(() => {
     const getLocalCart = localStorage.getItem("localCart");
     if (getLocalCart) {
@@ -81,21 +81,23 @@ const CartItem = ({
 
   const totalPrice = uniqueCartItems
     .flat()
-    .reduce((sum, item) => sum + item?.product?.price * item?.quantity, 0);
+    .reduce((sum, item) => sum + item.product.price * item.qty, 0);
   const formatedCurrrency = currencyFormat(totalPrice);
   // const formatedCurrrency = currencyFormat(0);
 
   function addToURlseachParamsForCheckOut() {
-    // const itemsToCheckout = flattenedCartItems.map((item) => ({
-    //   color: item.color,
-    //   size: item.size,
-    //   quantity: item.quantity,
-    //   product: {
-    //     price: item.product.price,
-    //     productId: item.product._id,
-    //   },
-    // }));
-    // localStorage.setItem("cartToCheckout", JSON.stringify(itemsToCheckout));
+    const itemsToCheckout = uniqueCartItems.map((item) => ({
+      color: item.color,
+      size: item.size,
+      quantity: item.qty,
+      product: {
+        price: item.product.price,
+        productId: item.product._id,
+      },
+    }));
+    localStorage.removeItem("localCart");
+    setLocalCart([]);
+    localStorage.setItem("cartToCheckout", JSON.stringify(itemsToCheckout));
   }
 
   return (

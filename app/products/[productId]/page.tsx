@@ -91,7 +91,7 @@ const page = async ({
                   <SizeVariant sizeData={size} key={size._id} />
                 ))}
             </div>
-            <AddToCart />
+            <AddToCart colorVariants={colorVariants} />
           </div>
         </div>
       </div>

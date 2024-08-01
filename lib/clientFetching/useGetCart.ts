@@ -5,8 +5,8 @@ export const useGetCart = ({
   color,
   size,
 }: {
-  color: string;
-  size: string;
+  color: string | null;
+  size: string | null;
 }) => {
   const ramdomId = uuidv4();
   const { data, isLoading, isSuccess } = useQuery({

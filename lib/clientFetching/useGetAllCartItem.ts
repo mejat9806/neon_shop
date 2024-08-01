@@ -21,6 +21,7 @@ export interface ResultDataType {
   quantity: number;
   image: string;
   id: string;
+  qty: number;
 }
 export const useGetAllCartItem = ({
   localCart,

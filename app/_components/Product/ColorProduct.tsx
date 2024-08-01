@@ -22,6 +22,8 @@ const ColorProduct = ({ variantData }: propVariantsType) => {
 
   function setURLSearchParams(value: string) {
     params.set("color", value);
+    params.delete("size");
+    // paramsSize.delete("size");
     router.replace(`${pathname}?${params.toString()}`, {
       //this url is new search params
       scroll: false,

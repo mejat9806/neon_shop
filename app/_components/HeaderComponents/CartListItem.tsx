@@ -1,31 +1,39 @@
 "use client";
+import { useContextStuff } from "@/app/_context/Context";
 import { ResultDataType } from "@/lib/clientFetching/useGetAllCartItem";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
-import { useContextStuff } from "@/app/_context/Context";
 
-const CartListItem = ({ item, uniqueCartItems }: { item: ResultDataType }) => {
+const CartListItem = ({
+  item,
+  uniqueCartItems,
+}: {
+  item: ResultDataType;
+  uniqueCartItems: ResultDataType[];
+}) => {
   const { setLocalCart, localCart } = useContextStuff();
-
+  console.log(
+    { uniqueCartItems, item, localCart },
+    "uniqueCartItemsuniqueCartItems",
+  );
   function deleteItemFromCart(itemToRemove: ResultDataType) {
-    const currentCart = uniqueCartItems;
-
-    const updatedCart = currentCart
-      .map((item: { uuid: number; qty: number }) => {
-        if (item.uuid === itemToRemove.uuid) {
-          const updatedQuantity = item.qty - 1;
+    const updatedCart = uniqueCartItems
+      .map((cartItem) => {
+        console.log(cartItem, "cartItemcartItem");
+        if (cartItem.uuid === itemToRemove.uuid) {
+          const updatedQuantity = cartItem.qty - 1;
+          console.log(updatedQuantity, "updatedQuantityupdatedQuantity");
           if (updatedQuantity <= 0) {
             return null;
           }
-          return { ...item, qty: updatedQuantity };
+          return { ...cartItem, qty: updatedQuantity };
         }
-        return item;
+        return cartItem;
       })
-      .filter((item: null) => item !== null);
-
+      .filter((cartItem) => cartItem !== null);
+    console.log(updatedCart, "updatedCartupdatedCartupdatedCart");
     setLocalCart(updatedCart);
-    localStorage.setItem("localCart", JSON.stringify(updatedCart));
   }
 
   return (
@@ -44,7 +52,7 @@ const CartListItem = ({ item, uniqueCartItems }: { item: ResultDataType }) => {
         <div className="ml-4 flex-col h-full w-full flex-1">
           <h1 className="text-lg font-semibold">{item?.product?.name}</h1>
           <p className="text-sm text-gray-500">${item?.product?.price}</p>
-          <p className="text-sm text-gray-500">Qty: {item?.qty}</p>
+          <p className="text-sm text-gray-500">Qty: {item.qty}</p>
         </div>
         <Button
           className="text-base border-2 border-red-600 text-red-600 hover:bg-white"
