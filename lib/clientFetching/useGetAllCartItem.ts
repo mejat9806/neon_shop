@@ -8,6 +8,7 @@ interface localCartType {
   size: string;
 }
 export interface ResultDataType {
+  uuid: number;
   _id: string;
   product: {
     _id: string;
@@ -19,6 +20,7 @@ export interface ResultDataType {
   size: string;
   quantity: number;
   image: string;
+  id: string;
 }
 export const useGetAllCartItem = ({
   localCart,

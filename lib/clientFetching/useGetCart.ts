@@ -1,7 +1,6 @@
 import { useQuery } from "@tanstack/react-query";
 import { getCartItem } from "./getCartItem";
-import { useContextStuff } from "@/app/_context/Context";
-
+import { v4 as uuidv4 } from "uuid";
 export const useGetCart = ({
   color,
   size,
@@ -9,8 +8,9 @@ export const useGetCart = ({
   color: string;
   size: string;
 }) => {
+  const ramdomId = uuidv4();
   const { data, isLoading, isSuccess } = useQuery({
-    queryKey: ["cartItem", color, size], // Unique query key based on parameters
+    queryKey: ["cartItem", color, size],
     queryFn: () => getCartItem({ color, size }),
   });
   return { data, isLoading };
