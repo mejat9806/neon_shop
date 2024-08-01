@@ -1,7 +1,10 @@
 import AddToCart from "@/app/_components/Product/AddToCart";
+import AddToCart from "@/app/_components/Product/AddToCart";
 import ColorProduct from "@/app/_components/Product/ColorProduct";
 import ImageCarousel from "@/app/_components/Product/ImageCarousel";
+import ImageCarousel from "@/app/_components/Product/ImageCarousel";
 import ImageView from "@/app/_components/Product/ImageView";
+import SizeVariant from "@/app/_components/Product/SizeVariant";
 import SizeVariant from "@/app/_components/Product/SizeVariant";
 import { productDataType, variantType } from "@/app/_types/type";
 
@@ -25,13 +28,24 @@ const page = async ({
 }: {
   params: { productId: string };
   searchParams?: { color?: string; size?: string };
+  searchParams?: { color?: string; size?: string };
 }) => {
   const { productId } = params;
+  const color = searchParams?.color;
+  const size = searchParams?.size || "";
   const color = searchParams?.color;
   const size = searchParams?.size || "";
   const data: productDataType = await fetch(
     `http://localhost:3000/api/products/${productId}`,
   ).then((res) => res.json());
+  let colorVariants: variantType[] = [];
+  if (color) {
+    colorVariants = await fetch(
+      `http://localhost:3000/api/products/${productId}?color=${color}`,
+    ).then((data) => data.json());
+  }
+  console.log(colorVariants, "grouped variants");
+
   let colorVariants: variantType[] = [];
   if (color) {
     colorVariants = await fetch(
@@ -63,10 +77,24 @@ const page = async ({
 
   // const size = groupedVariants.flatMap((size) => size.sizes);
 
+  // const size = groupedVariants.flatMap((size) => size.sizes);
+
   return (
     <div className="w-full mt-20">
       <div className="lg:grid lg:grid-cols-[1fr_0.8fr] flex flex-col  mx-9">
+      <div className="lg:grid lg:grid-cols-[1fr_0.8fr] flex flex-col  mx-9">
         <div>
+          <div className="hidden lg:flex">
+            <ImageView productData={data} />
+          </div>
+          <div className="lg:hidden">
+            <ImageCarousel productData={data} />
+          </div>
+        </div>
+
+        <div className="flex flex-col gap-y-2">
+          <h1 className="font-silkscreen  font-bold text-3xl">{data.name}</h1>
+          <h1 className="text-2xl font-bold font-orbitron">{data.desc}</h1>
           <div className="hidden lg:flex">
             <ImageView productData={data} />
           </div>
