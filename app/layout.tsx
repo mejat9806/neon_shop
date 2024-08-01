@@ -4,7 +4,9 @@ import type { Metadata } from "next";
 import { Inter, Orbitron, Silkscreen } from "next/font/google";
 import localFont from "next/font/local";
 import "./globals.css";
-import { ContextStuffProvider } from "@/lib/Context";
+import { ContextStuffProvider } from "./_context/Context";
+import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import ReactQueryProvider from "./_Provider/ReactQueryProvider";
 
 const inter = Inter({ subsets: ["latin"] });
 
@@ -53,11 +55,13 @@ export default function RootLayout({
         className={`${inter.className} ${silkscreen.variable} ${orbitron.variable} ${tiny5.variable}${saiba.variable} ${saibaOutline.variable} `}
       >
         <Canvas />
-        <ContextStuffProvider>
-          <div className="h-full ">
-            <main className=" "> {children}</main>
-          </div>
-        </ContextStuffProvider>
+        <ReactQueryProvider>
+          <ContextStuffProvider>
+            <div className="h-full ">
+              <main className=" "> {children}</main>
+            </div>
+          </ContextStuffProvider>
+        </ReactQueryProvider>
       </body>
     </html>
   );

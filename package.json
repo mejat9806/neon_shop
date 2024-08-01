@@ -11,10 +11,12 @@
   },
   "dependencies": {
     "@radix-ui/react-slot": "^1.1.0",
+    "@tanstack/react-query": "^5.51.15",
     "class-variance-authority": "^0.7.0",
     "clsx": "^2.1.1",
     "date-fns": "^3.6.0",
     "dotenv": "^16.4.5",
+    "embla-carousel-react": "^8.1.7",
     "framer-motion": "^11.3.8",
     "lucide-react": "^0.412.0",
     "mime": "^4.0.4",
@@ -27,7 +29,8 @@
     "sharp": "^0.33.4",
     "simplex-noise": "^4.0.2",
     "tailwind-merge": "^2.4.0",
-    "tailwindcss-animate": "^1.0.7"
+    "tailwindcss-animate": "^1.0.7",
+    "uuid": "^10.0.0"
   },
   "devDependencies": {
     "@types/mime": "^4.0.0",
@@ -35,6 +38,7 @@
     "@types/node": "^20",
     "@types/react": "^18",
     "@types/react-dom": "^18",
+    "@types/uuid": "^10.0.0",
     "eslint": "^8",
     "eslint-config-next": "14.2.5",
     "postcss": "^8",

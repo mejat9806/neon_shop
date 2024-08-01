@@ -2,9 +2,9 @@
 import React from "react";
 import Header from "./Header";
 import { AnimatePresence } from "framer-motion";
-import { useContextStuff } from "@/lib/Context";
 import NavItem from "./NavItem";
 import CartItem from "./CartItem";
+import { useContextStuff } from "@/app/_context/Context";
 
 const MainHeader = () => {
   const { isNavOpen, isCartOpen, setIsNavOpen, setIsCartOpen } =
