@@ -1,8 +1,6 @@
 "use client";
 import { useContextStuff } from "@/app/_context/Context";
 import { ResultDataType } from "@/lib/clientFetching/useGetAllCartItem";
-"use client";
-import { ResultDataType } from "@/lib/clientFetching/useGetAllCartItem";
 import Image from "next/image";
 import Link from "next/link";
 import { Button } from "../ui/button";
@@ -36,31 +34,6 @@ const CartListItem = ({
       .filter((cartItem) => cartItem !== null);
     console.log(updatedCart, "updatedCartupdatedCartupdatedCart");
     setLocalCart(updatedCart);
-  }
-
-import { useContextStuff } from "@/app/_context/Context";
-
-const CartListItem = ({ item, uniqueCartItems }: { item: ResultDataType }) => {
-  const { setLocalCart, localCart } = useContextStuff();
-
-  function deleteItemFromCart(itemToRemove: ResultDataType) {
-    const currentCart = uniqueCartItems;
-
-    const updatedCart = currentCart
-      .map((item: { uuid: number; qty: number }) => {
-        if (item.uuid === itemToRemove.uuid) {
-          const updatedQuantity = item.qty - 1;
-          if (updatedQuantity <= 0) {
-            return null;
-          }
-          return { ...item, qty: updatedQuantity };
-        }
-        return item;
-      })
-      .filter((item: null) => item !== null);
-
-    setLocalCart(updatedCart);
-    localStorage.setItem("localCart", JSON.stringify(updatedCart));
   }
 
   return (
